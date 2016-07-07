@@ -1,0 +1,20 @@
+h1 {
+	text-align:center;
+	color: #B22222;
+}
+a {
+	color: #B22222;
+}
+.wine {
+	background-color: white;
+}
+
+.span5, .span7 {
+	border-style: solid;
+	border-width: 2px;
+}
+
+.col-sm-10 {
+	max-width: 60%;
+
+}
