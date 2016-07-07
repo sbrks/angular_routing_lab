@@ -31,16 +31,34 @@ app.config(function($routeProvider, $locationProvider) {
 // CONTROLLERS //
 /////////////////
 
-app.controller('WinesIndexCtrl',function($scope, WineService){
-  console.log("Wine Index");
-  $scope.hello = "wine index controller is working!";
-  $scope.wines = WineService.query();
-})
 
-app.controller('WinesShowCtrl',function($scope, WineService, $routeParams){
-  console.log($routeParams.id);
-  $scope.wine = WineService.get($routeParams.id);
 
+app.controller('WinesIndexCtrl', function($scope, $http) { //remove WineService
+    console.log("Wine Index");
+
+    //   console.log("Wine Index");
+//   $scope.hello = "wine index controller is working!";
+//   $scope.wines = WineService.query();
+
+    $http.get('http://daretoexplore.herokuapp.com/wines')
+      .then(function(response, err) {
+        if (err) {
+            console.log('error: ', err);
+        }
+        $scope.wines = response.data;
+      });
+
+});
+
+
+app.controller('WinesShowCtrl',function($scope, $routeParams, $http){ //remove WineService
+  // console.log($routeParams.id);
+  // $scope.wine = WineService.get($routeParams.id);
+  var idString = ($routeParams.id);
+  $http.get('http://daretoexplore.herokuapp.com/wines/' + idString)
+    .then(function(response, err) {
+        $scope.wine = response.data;
+    });
 });
 
 ////////////
